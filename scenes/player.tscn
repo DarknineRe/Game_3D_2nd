@@ -719,8 +719,11 @@ disabled = true
 script = ExtResource("6_3v2ag")
 hitbox = NodePath("../Hitbox")
 
-[node name="HpBar" parent="." node_paths=PackedStringArray("HPnode") instance=ExtResource("7_jej6c")]
-HPnode = NodePath("../Health")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HpBar" parent="CanvasLayer" node_paths=PackedStringArray("HPnode") instance=ExtResource("7_jej6c")]
+HPnode = NodePath("../../Health")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="damaged" from="Hitbox" to="." method="damage"]

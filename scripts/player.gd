@@ -15,7 +15,8 @@ var alive: bool = true
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var camera = $Camera3D
 @onready var state_machine = animation_tree["parameters/playback"]
-@onready var hp_bar = $HpBar
+@onready var hp_bar: HPbar = $CanvasLayer/HpBar
+
 @onready var health: Health = $Health
 @onready var don_t: Node3D = $Don_T
 
