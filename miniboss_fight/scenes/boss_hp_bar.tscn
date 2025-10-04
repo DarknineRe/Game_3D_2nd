@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq4v7w8a3x7jp"]
+
+[ext_resource type="Texture2D" uid="uid://d35jy1smd47qh" path="res://Art/BarV5_Bar.png" id="1_6x6nw"]
+[ext_resource type="Texture2D" uid="uid://dmelf40s7pwcn" path="res://Art/BarV5_ProgressBar.png" id="2_o1a88"]
+[ext_resource type="Script" uid="uid://2y3r3xmbi7vm" path="res://scripts/boss_hp_bar.gd" id="3_6x6nw"]
+
+[node name="BossHpBar" type="TextureProgressBar"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -76.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+value = 100.0
+texture_under = ExtResource("1_6x6nw")
+texture_progress = ExtResource("2_o1a88")
+texture_progress_offset = Vector2(1, 0)
+script = ExtResource("3_6x6nw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

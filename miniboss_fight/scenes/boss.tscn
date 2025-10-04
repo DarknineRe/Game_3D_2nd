@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckmhkii5ugpt6"]
+
+[ext_resource type="PackedScene" uid="uid://bon3ynktfd7lm" path="res://model/boss/king_slime.glb" id="1_0bnu1"]
+[ext_resource type="Script" uid="uid://dupt42sdt4f86" path="res://scripts/boss.gd" id="1_6xxrv"]
+[ext_resource type="PackedScene" uid="uid://dq4v7w8a3x7jp" path="res://scenes/boss_hp_bar.tscn" id="3_o1i15"]
+[ext_resource type="Script" uid="uid://7fdm83my23un" path="res://scripts/health.gd" id="4_we8h1"]
+[ext_resource type="Script" uid="uid://qnma3pfvepci" path="res://scripts/hitbox.gd" id="5_kvofc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_we8h1"]
+margin = 0.0
+radius = 4.7
+
+[node name="boss" type="CharacterBody3D" node_paths=PackedStringArray("HPnode") groups=["boss"]]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_6xxrv")
+HPnode = NodePath("Health")
+
+[node name="king_slime" parent="." instance=ExtResource("1_0bnu1")]
+
+[node name="BossHpBar" parent="." node_paths=PackedStringArray("HPnode") instance=ExtResource("3_o1i15")]
+HPnode = NodePath("../Health")
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_we8h1")
+max_health = 500.0
+hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://7fdm83my23un"
+
+[node name="Hitbox" type="Area3D" parent="."]
+script = ExtResource("5_kvofc")
+metadata/_custom_type_script = "uid://qnma3pfvepci"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.697436, 3.52424, 0.283105)
+shape = SubResource("SphereShape3D_we8h1")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.697436, 4.38925, 0.43694)
+shape = SubResource("SphereShape3D_we8h1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 475.0
+offset_top = 509.0
+offset_right = 672.0
+offset_bottom = 564.0
+theme_override_font_sizes/font_size = 40
+text = "King slime"
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="damaged" from="Hitbox" to="." method="damage"]
+[connection signal="damaged" from="Hitbox" to="Health" method="damaged"]
